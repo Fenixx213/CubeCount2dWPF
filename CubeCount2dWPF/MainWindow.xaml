@@ -1,0 +1,61 @@
+﻿<Window x:Class="CubeCount2D.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Определите из скольких кубиков составлена конструкция" Height="400" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Определите из скольких кубиков составлена конструкция" 
+                   Background="#FFFACD" Foreground="Blue" FontSize="16" 
+                   HorizontalAlignment="Center" Padding="10" TextAlignment="Center">
+            <TextBlock.TextDecorations>
+                <TextDecoration Location="Underline"/>
+            </TextBlock.TextDecorations>
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="10" Grid.ColumnSpan="2" Margin="0,0,266,-198">
+                <Border.Background>
+                    <SolidColorBrush Color="#FFFACD"/>
+                </Border.Background>
+                <StackPanel>
+                    <Image x:Name="topViewImage" Stretch="Uniform"/>
+                    <TextBlock Text="ВИД СВЕРХУ" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="10" Margin="0,0,0,-198">
+                <Border.Background>
+                    <SolidColorBrush Color="#FFFACD"/>
+                </Border.Background>
+                <StackPanel>
+                    <Image x:Name="leftViewImage" Stretch="Uniform"/>
+                    <TextBlock Text="ВИД СЛЕВА" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="10" Grid.ColumnSpan="2" Margin="266,0,0,-198">
+                <Border.Background>
+                    <SolidColorBrush Color="#FFFACD"/>
+                </Border.Background>
+                <StackPanel>
+                    <Image x:Name="frontViewImage" Stretch="Uniform"/>
+                    <TextBlock Text="ВИД СПЕРЕДИ" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Viewport3D x:Name="viewport" Grid.Row="2" Margin="0,200,0,0"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <TextBox x:Name="guessTextBox" Width="100" Margin="5"/>
+            <Button x:Name="CheckButton" Content="Проверка" Click="CheckButton_Click" Margin="5"/>
+            <Button x:Name="RestartButton" Content="Рестарт" Click="RestartButton_Click" Margin="5"/>
+            <TextBlock x:Name="resultLabel" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
