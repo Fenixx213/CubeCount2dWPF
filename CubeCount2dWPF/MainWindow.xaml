@@ -1,61 +1,238 @@
 ﻿<Window x:Class="CubeCount2D.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Определите из скольких кубиков составлена конструкция" Height="400" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Определите из скольких кубиков составлена конструкция" 
-                   Background="#FFFACD" Foreground="Blue" FontSize="16" 
-                   HorizontalAlignment="Center" Padding="10" TextAlignment="Center">
-            <TextBlock.TextDecorations>
-                <TextDecoration Location="Underline"/>
-            </TextBlock.TextDecorations>
-        </TextBlock>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Padding="10" Grid.ColumnSpan="2" Margin="0,0,266,-198">
-                <Border.Background>
-                    <SolidColorBrush Color="#FFFACD"/>
-                </Border.Background>
-                <StackPanel>
-                    <Image x:Name="topViewImage" Stretch="Uniform"/>
-                    <TextBlock Text="ВИД СВЕРХУ" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="10" Margin="0,0,0,-198">
-                <Border.Background>
-                    <SolidColorBrush Color="#FFFACD"/>
-                </Border.Background>
-                <StackPanel>
-                    <Image x:Name="leftViewImage" Stretch="Uniform"/>
-                    <TextBlock Text="ВИД СЛЕВА" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Padding="10" Grid.ColumnSpan="2" Margin="266,0,0,-198">
-                <Border.Background>
-                    <SolidColorBrush Color="#FFFACD"/>
-                </Border.Background>
-                <StackPanel>
-                    <Image x:Name="frontViewImage" Stretch="Uniform"/>
-                    <TextBlock Text="ВИД СПЕРЕДИ" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red"/>
-                </StackPanel>
-            </Border>
+        Title="Определите из скольких кубиков составлена конструкция" Height="720" Width="1280">
+   
+
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Column="0" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
+                    <Border Grid.Column="0" Grid.Row="0" Background="WhiteSmoke" Padding="2.5" CornerRadius="4" BorderBrush="#ccc" BorderThickness="1">
+                        <Grid Width="200" Height="230">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="topViewImage" Grid.Row="0" Stretch="Uniform" Height="200" Width="200"/>
+                            <TextBlock Text="ВИД СВЕРХУ" Grid.Row="1" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Foreground="DodgerBlue"/>
+                        </Grid>
+                    </Border>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
+                    <Border Grid.Column="1" Grid.Row="0" Background="WhiteSmoke" Padding="2.5" CornerRadius="4" BorderBrush="#ccc" BorderThickness="1">
+                        <Grid Width="200" Height="230">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="leftViewImage" Grid.Row="0" Stretch="Uniform" Height="200" Width="200"/>
+                            <TextBlock  Text="ВИД СЛЕВА" Grid.Row="1"   HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Foreground="DodgerBlue"/>
+                        </Grid>
+                    </Border>
+                </Viewbox>
+                <Viewbox Grid.Column="2" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
+                    <Border Grid.Column="2" Grid.Row="0" Background="WhiteSmoke" Padding="2.5" CornerRadius="4" BorderBrush="#ccc" BorderThickness="1">
+                        <Grid Width="200" Height="230">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="frontViewImage" Grid.Row="0" Stretch="Uniform" Height="200" Width="200"/>
+                            <TextBlock Text="ВИД СПЕРЕДИ" Grid.Row="1"   HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Foreground="DodgerBlue"/>
+                        </Grid>
+                    </Border>
+
+                </Viewbox>
+            </Grid>
         </Grid>
-        <Viewport3D x:Name="viewport" Grid.Row="2" Margin="0,200,0,0"/>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <TextBox x:Name="guessTextBox" Width="100" Margin="5"/>
-            <Button x:Name="CheckButton" Content="Проверка" Click="CheckButton_Click" Margin="5"/>
-            <Button x:Name="RestartButton" Content="Рестарт" Click="RestartButton_Click" Margin="5"/>
-            <TextBlock x:Name="resultLabel" Margin="5"/>
+        <!-- Кнопки и текст -->
+        <StackPanel Grid.Column="2" Margin="20,0,10,0">
+            <TextBlock Text="Посчитай кубы" FontSize="36" FontWeight="Bold" TextWrapping="Wrap" Foreground="#1f3c88"/>
+            <TextBlock x:Name="StatusText" Text="" FontSize="26"  FontWeight="SemiBold" Foreground="Crimson" TextWrapping="Wrap" Margin="5,0,0,5"/>
+            <Border Background="White" Padding="10" CornerRadius="10" BorderBrush="#ccc" BorderThickness="1">
+                <TextBlock FontSize="20" Foreground="Black" TextAlignment="Center" TextWrapping="Wrap"> 
+Посчитай количество кубов по трем видам.
+                </TextBlock>
+            </Border>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+               
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Кубы: " FontSize="26" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="guessTextBox" Width="100" Height="50" Margin="5" Grid.Column="1" HorizontalAlignment="Left" TextAlignment="Center" FontSize="36"/>
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+        Content="✅ Проверить"
+Margin="5"
+Background="DarkGreen"
+Foreground="White"
+FontWeight="SemiBold"
+BorderThickness="0"
+Cursor="Hand"
+Click="CheckButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+            Background="{TemplateBinding Background}"
+            CornerRadius="2"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="LightGreen"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Green"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="2"
+        Content="💡 Подсказка"
+Margin="5"
+Background="Goldenrod"
+Foreground="White"
+FontWeight="SemiBold"
+BorderThickness="0"
+Cursor="Hand"
+Click="HelpButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+            Background="{TemplateBinding Background}"
+            CornerRadius="2"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Orange"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="DarkOrange"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="1"
+        Content="🔄 Заново"
+Margin="5"
+Background="MediumBlue"
+Foreground="White"
+FontWeight="SemiBold"
+BorderThickness="0"
+Cursor="Hand"
+Click="RestartButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+            Background="{TemplateBinding Background}"
+            CornerRadius="2"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="RoyalBlue"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Navy"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="3"
+        Content="❌ Выход"
+        Margin="5"
+        Background="DarkRed"
+        Foreground="White"
+        FontWeight="SemiBold"
+        BorderThickness="0"
+        Cursor="Hand"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Click="ExitButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+Background="{TemplateBinding Background}"
+CornerRadius="2"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="PaleVioletRed"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+            </Grid>
+            <Viewbox Stretch="Uniform" VerticalAlignment="Bottom">
+                <Viewport3D x:Name="viewport" Visibility="Hidden"  Height="400" Width="400" Margin="10"/>
+            </Viewbox>
         </StackPanel>
+        <TextBlock x:Name="resultLabel" Margin="5"/>
     </Grid>
 </Window>

@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Threading;
 
 namespace CubeCount2D
 {
@@ -22,7 +23,7 @@ namespace CubeCount2D
         private double phi = Math.PI / 2;
         private readonly double radius = 10;
         private List<Point3D> occupiedPositions = new List<Point3D>();
-
+        private DispatcherTimer statusTimer;
         public MainWindow()
         {
             InitializeComponent();
@@ -90,7 +91,7 @@ namespace CubeCount2D
             };
             mesh.Positions = positions;
             mesh.TriangleIndices = indices;
-            DiffuseMaterial material = new DiffuseMaterial(new SolidColorBrush(Color.FromArgb(128, 128, 128, 128)));
+            DiffuseMaterial material = new DiffuseMaterial(new SolidColorBrush(Color.FromArgb(128, 255,255,255)));
             GeometryModel3D cubeModel = new GeometryModel3D
             {
                 Geometry = mesh,
@@ -121,6 +122,14 @@ namespace CubeCount2D
 
         private void GenerateCubes()
         {
+
+            statusTimer = new DispatcherTimer();
+            statusTimer.Interval = TimeSpan.FromSeconds(2);
+            statusTimer.Tick += (s, e) =>
+            {
+                StatusText.Text = "";
+                statusTimer.Stop();
+            };
             cubeCount = random.Next(4, 7);
             cubesModel.Children.Clear();
             occupiedPositions.Clear();
@@ -416,8 +425,8 @@ namespace CubeCount2D
                         if (cellX < grid.GetLength(0) && cellY < grid.GetLength(1) && grid[cellX, cellY])
                         {
                             pixels[index] = 255;     // B
-                            pixels[index + 1] = 255; // G
-                            pixels[index + 2] = 0;   // R
+                            pixels[index + 1] = 144; // G
+                            pixels[index + 2] = 30;   // R
                             pixels[index + 3] = 255; // A
                         }
                     }
@@ -434,17 +443,20 @@ namespace CubeCount2D
             {
                 if (userGuess == cubeCount)
                 {
-                    resultLabel.Text = "Правильно!";
-                   
+                    ShowStatus("Правильно.");
+                    return;
+
                 }
                 else
                 {
-                    resultLabel.Text = "Неправильно.";
+                    ShowStatus("Неправильно.");
+                    return;
                 }
             }
             else
             {
-                resultLabel.Text = "Введите число!";
+                ShowStatus("Введите число.");
+                return;
             }
         }
 
@@ -453,7 +465,29 @@ namespace CubeCount2D
             GenerateCubes();
             Update2DViews();
             guessTextBox.Text = "";
-            resultLabel.Text = "";
+            StatusText.Text = "";
+        }
+        private void ShowStatus(string message)
+        {
+            StatusText.Text = message;
+            StatusText.Visibility = Visibility.Visible;
+            statusTimer.Stop(); // сбрасываем, если таймер уже бежит
+            statusTimer.Start(); // запускаем заново
+        }
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewport.Visibility == Visibility.Hidden)
+            {
+                viewport.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                viewport.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
